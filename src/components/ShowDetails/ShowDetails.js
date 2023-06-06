@@ -21,16 +21,28 @@ const ShowDetails = () => {
     }, [id]);
 
     const summaryText = show?.summary
-        ? `${show.summary.replace(/<.+?>/g, '').split(' ').slice(0, 10).join(' ')}...`
+        ? `${show.summary.replace(/<.+?>/g, '')}`
         : "No description";
 
-    return <div className={"detail-wrapper"}>
+    return <div >
         {show ? (
-            <div className={"d-flex"}>
+            <div className={"detail-container"}>
                 <img src={show.image?.original} alt=""/>
-                <div>
-                    <h1>{show.name}</h1>
+                <div className={"text-wrapper"}>
+                    <h1 className={"text-danger"}>{show.name}</h1>
                     <p>{summaryText}</p>
+                    {
+                        show.rating.average &&
+                        <p>Rating : <span className={"text-warning fw-semibold"}>{show.rating.average}</span></p>
+                    }
+
+                    <div className={"d-flex gap-3"}>
+                        {
+                            show.genres.map((val,index)=>{
+                                return<p key={index} className={"genres bg-info"}>{val}</p>
+                            })
+                        }
+                    </div>
                 </div>
 
 

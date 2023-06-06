@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {fetchShows} from './api';
 import ShowList from './components/ShowList/ShowList';
 import ShowDetails from './components/ShowDetails/ShowDetails';
-import BookingForm from './components/BookingForm';
+import BookingForm from './components/BookingForm/BookingForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {

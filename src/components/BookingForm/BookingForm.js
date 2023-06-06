@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
+import './bookingForm.scss';
 
 const BookingForm = () => {
     const [name, setName] = useState('');
     const [details, setDetails] = useState('');
     const [savedName, setSavedName] = useState('');
     const [savedDetails, setSavedDetails] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
-        // Retrieve saved booking details from storage
         const savedName = localStorage.getItem('bookingName');
         const savedDetails = sessionStorage.getItem('bookingDetails');
 
-        // Update state with saved values
         if (savedName) {
             setSavedName(savedName);
         }
@@ -22,31 +22,38 @@ const BookingForm = () => {
 
     const handleBooking = (e) => {
         e.preventDefault();
-
-        // Save booking details to local or session storage
         localStorage.setItem('bookingName', name);
         sessionStorage.setItem('bookingDetails', details);
 
-        // Clear form inputs
         setName('');
         setDetails('');
+        setSavedName(name);
+        setSavedDetails(details);
+        setShowAlert(true);
 
-        // Display a success message or perform any other action
-        alert('Booking successful!');
+        // Automatically close the alert after 3 seconds
+        setTimeout(() => {
+            setShowAlert(false);
+        }, 4000);
     };
 
-    return <div>
-        <h1>Booking Form</h1>
+    return <div className="booking-form">
+        <h1 className="text-danger">Booking Form</h1>
+        {showAlert && (
+            <div className="alert alert-success mt-3">
+                Booking successful!
+            </div>
+        )}
         {savedName && savedDetails && (
-            <div>
-                <h3>Saved Booking Details:</h3>
+            <div className="saved-details">
+                <h3 className="text-info">Saved Booking Details:</h3>
                 <p>Name: {savedName}</p>
                 <p>Details: {savedDetails}</p>
             </div>
         )}
         <form onSubmit={handleBooking}>
             <div className="form-group">
-                <label htmlFor="name">Movie Name:</label>
+                <label htmlFor="name">Movie Name</label>
                 <input
                     type="text"
                     className="form-control"
@@ -56,7 +63,7 @@ const BookingForm = () => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="details">Details:</label>
+                <label htmlFor="details">Details</label>
                 <textarea
                     className="form-control"
                     id="details"
