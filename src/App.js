@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {fetchShows} from './api';
-import ShowList from './components/ShowList';
-import ShowDetails from './components/ShowDetails';
+import ShowList from './components/ShowList/ShowList';
+import ShowDetails from './components/ShowDetails/ShowDetails';
 import BookingForm from './components/BookingForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     const [shows, setShows] = useState([]);
@@ -20,7 +21,7 @@ function App() {
 
     return <Router>
         <div className="container mt-4">
-            <h1>TV Shows</h1>
+
             <Routes>
                 <Route exact path="/" element={<ShowList shows={shows}/>}/>
                 <Route path="/show/:id" element={<ShowDetails/>}/>
