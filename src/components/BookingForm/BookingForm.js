@@ -77,6 +77,6 @@ const BookingForm = () => {
             </button>
         </form>
     </div>
-};
+}
 
 export default BookingForm;
